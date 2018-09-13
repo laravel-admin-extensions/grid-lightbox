@@ -3,6 +3,10 @@ Turn your grid into a lightbox & gallery
 
 This is an extension to integrates [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/) into laravel-admin.
 
+DEMO [lightbox](http://demo.laravel-admin.org/lightbox/lightbox) & [gallery](http://demo.laravel-admin.org/lightbox/gallery)
+
+Login using `admin/admin`
+
 ## Installation 
 
 ```bash
