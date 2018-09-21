@@ -44,6 +44,10 @@ $grid->picture()->gallery();
 //zoom effect
 $grid->picture()->lightbox(['zooming' => true]);
 $grid->picture()->gallery(['zooming' => true]);
+
+//width & height properties
+$grid->picture()->lightbox(['width' => 50, 'height' => 50]);
+$grid->picture()->gallery(['width' => 50, 'height' => 50]);
 ```
 
 ## Donate
