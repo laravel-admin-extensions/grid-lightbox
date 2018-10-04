@@ -35,6 +35,10 @@ SCRIPT;
 
     public function display(array $options = [])
     {
+        if (empty($this->value)) {
+            return '';
+        }
+
         $server = array_get($options, 'server');
         $width = array_get($options, 'width', 200);
         $height = array_get($options, 'height', 200);
