@@ -28,7 +28,7 @@ SCRIPT;
             'zoom' => [
                 'enabled' => true,
                 'duration' => 300,
-                'easing'   => 'ease-in-out',
+                'easing' => 'ease-in-out',
             ]
         ]);
     }
@@ -37,6 +37,10 @@ SCRIPT;
     {
         if (empty($this->value)) {
             return '';
+        }
+
+        if ($this->value instanceof Arrayable) {
+            $this->value = $this->value->toArray();
         }
 
         $server = array_get($options, 'server');
@@ -49,18 +53,20 @@ SCRIPT;
 
         Admin::script($this->script());
 
-        if (url()->isValidUrl($this->value)) {
-            $src = $this->value;
-        } elseif ($server) {
-            $src = rtrim($server, '/') . '/' . ltrim($this->value, '/');
-        } else {
-            $src = Storage::disk(config('admin.upload.disk'))->url($this->value);
-        }
+        return collect((array)$this->value)->filter()->map(function ($path) use ($server, $width, $height) {
+            if (url()->isValidUrl($path) || strpos($path, 'data:image') === 0) {
+                $src = $path;
+            } elseif ($server) {
+                $src = rtrim($server, '/') . '/' . ltrim($path, '/');
+            } else {
+                $src = Storage::disk(config('admin.upload.disk'))->url($path);
+            }
 
-        return <<<HTML
+            return <<<HTML
 <a href="$src" class="grid-popup-link">
     <img src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img img-thumbnail' />
 </a>
 HTML;
+        })->implode('&nbsp;');
     }
 }
