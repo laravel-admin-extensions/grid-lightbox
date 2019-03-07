@@ -48,6 +48,10 @@ $grid->picture()->gallery(['zooming' => true]);
 //width & height properties
 $grid->picture()->lightbox(['width' => 50, 'height' => 50]);
 $grid->picture()->gallery(['width' => 50, 'height' => 50]);
+
+//img class properties
+$grid->picture()->lightbox(['class' => 'rounded']);
+$grid->picture()->gallery(['class' => ['circle', 'thumbnail']]);
 ```
 
 ## Donate
