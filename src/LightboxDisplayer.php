@@ -46,6 +46,10 @@ SCRIPT;
         $server = array_get($options, 'server');
         $width = array_get($options, 'width', 200);
         $height = array_get($options, 'height', 200);
+        $class = array_get($options, 'class', 'thumbnail');
+        $class = collect((array)$class)->map(function ($item) {
+            return 'img-'. $item;
+        })->implode(' ');
 
         if (array_get($options, 'zooming')) {
             $this->zooming();
@@ -53,7 +57,7 @@ SCRIPT;
 
         Admin::script($this->script());
 
-        return collect((array)$this->value)->filter()->map(function ($path) use ($server, $width, $height) {
+        return collect((array)$this->value)->filter()->map(function ($path) use ($server, $width, $height, $class) {
             if (url()->isValidUrl($path) || strpos($path, 'data:image') === 0) {
                 $src = $path;
             } elseif ($server) {
@@ -64,7 +68,7 @@ SCRIPT;
 
             return <<<HTML
 <a href="$src" class="grid-popup-link">
-    <img src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img img-thumbnail' />
+    <img src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img {$class}' />
 </a>
 HTML;
         })->implode('&nbsp;');
