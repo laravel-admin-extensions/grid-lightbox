@@ -3,6 +3,7 @@
 namespace Encore\Grid\Lightbox;
 
 use Encore\Admin\Admin;
+use Illuminate\Support\Arr;
 use Encore\Admin\Grid\Displayers\AbstractDisplayer;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,15 +44,15 @@ SCRIPT;
             $this->value = $this->value->toArray();
         }
 
-        $server = \Arr::get($options, 'server');
-        $width = \Arr::get($options, 'width', 200);
-        $height = \Arr::get($options, 'height', 200);
-        $class = \Arr::get($options, 'class', 'thumbnail');
+        $server = Arr::get($options, 'server');
+        $width = Arr::get($options, 'width', 200);
+        $height = Arr::get($options, 'height', 200);
+        $class = Arr::get($options, 'class', 'thumbnail');
         $class = collect((array)$class)->map(function ($item) {
             return 'img-'. $item;
         })->implode(' ');
 
-        if (\Arr::get($options, 'zooming')) {
+        if (Arr::get($options, 'zooming')) {
             $this->zooming();
         }
 
