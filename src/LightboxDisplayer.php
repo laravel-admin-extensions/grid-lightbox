@@ -51,7 +51,7 @@ SCRIPT;
             return 'img-'. $item;
         })->implode(' ');
 
-        if (array_get($options, 'zooming')) {
+        if (\Arr::get($options, 'zooming')) {
             $this->zooming();
         }
 
