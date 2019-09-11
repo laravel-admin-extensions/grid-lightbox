@@ -43,10 +43,10 @@ SCRIPT;
             $this->value = $this->value->toArray();
         }
 
-        $server = array_get($options, 'server');
-        $width = array_get($options, 'width', 200);
-        $height = array_get($options, 'height', 200);
-        $class = array_get($options, 'class', 'thumbnail');
+        $server = \Arr::get($options, 'server');
+        $width = \Arr::get($options, 'width', 200);
+        $height = \Arr::get($options, 'height', 200);
+        $class = \Arr::get($options, 'class', 'thumbnail');
         $class = collect((array)$class)->map(function ($item) {
             return 'img-'. $item;
         })->implode(' ');
