@@ -28,7 +28,6 @@
             "providers": [
                 "Encore\\Grid\\Lightbox\\LightboxServiceProvider"
             ]
-
         }
     }
 }
