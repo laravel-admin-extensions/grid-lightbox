@@ -48,6 +48,7 @@ SCRIPT;
         $server = Arr::get($options, 'server');
         $width = Arr::get($options, 'width', 200);
         $height = Arr::get($options, 'height', 200);
+        $title = Arr::get($options, 'title', '');
         $class = Arr::get($options, 'class', 'thumbnail');
         $class = collect((array)$class)->map(function ($item) {
             return 'img-'. $item;
@@ -59,7 +60,7 @@ SCRIPT;
 
         Admin::script($this->script());
 
-        return collect((array)$this->value)->filter()->map(function ($path) use ($server, $width, $height, $class) {
+        return collect((array)$this->value)->filter()->map(function ($path) use ($server, $width, $height, $class, $title) {
             if (url()->isValidUrl($path) || strpos($path, 'data:image') === 0) {
                 $src = $path;
             } elseif ($server) {
@@ -70,7 +71,7 @@ SCRIPT;
 
             return <<<HTML
 <a href="$src" class="grid-popup-link">
-    <img src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img {$class}' />
+    <img src='$src' style='max-width:{$width}px;max-height:{$height}px' class='img {$class}' title='{$title}' />
 </a>
 HTML;
         })->implode('&nbsp;');
